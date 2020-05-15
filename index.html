@@ -113,9 +113,9 @@
 
 
   
-    <article id="post-stream学习map()" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-MarkDown测试" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2020/05/15/stream%E5%AD%A6%E4%B9%A0map()/" class="article-date">
+    <a href="/2020/05/15/MarkDown%E6%B5%8B%E8%AF%95/" class="article-date">
   <time datetime="2020-05-15T07:41:10.174Z" itemprop="datePublished">2020-05-15</time>
 </a>
     
@@ -127,7 +127,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/15/stream%E5%AD%A6%E4%B9%A0map()/">stream处理list中的内容</a>
+      <a class="article-title" href="/2020/05/15/MarkDown%E6%B5%8B%E8%AF%95/">MarkDown测试</a>
     </h1>
   
 
@@ -135,16 +135,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>第一种方法</p>
+        <p>ONE</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">    List&lt;String&gt; name &#x3D; Arrays.asList(&quot;Apple&quot;, &quot;Banana&quot;, &quot;Orange&quot;, &quot;Drangon&quot;);</span><br><span class="line">    List&lt;String&gt; list &#x3D; name.stream()</span><br><span class="line">        .map(a -&gt; &#123;</span><br><span class="line">              a &#x3D; a.replace(&quot;a&quot;, &quot;i&quot;);</span><br><span class="line">              return a;</span><br><span class="line">            &#125;</span><br><span class="line">        )</span><br><span class="line">        .sorted()</span><br><span class="line">        .collect(Collectors.toList());</span><br><span class="line">    System.out.println(list);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 <hr>
-<p>第二种方法</p>
+<p>TWO</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">    List&lt;String&gt; name &#x3D; Arrays.asList(&quot;Apple&quot;, &quot;Banana&quot;, &quot;Orange&quot;, &quot;Drangon&quot;);</span><br><span class="line">    List&lt;String&gt; list &#x3D; name.stream()</span><br><span class="line">        .map(String::toUpperCase)</span><br><span class="line">        .sorted()</span><br><span class="line">        .collect(Collectors.toList());</span><br><span class="line">    System.out.println(list);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/05/15/stream%E5%AD%A6%E4%B9%A0map()/" data-id="cka7zx9qw0000vcxug8hp4gqi" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/05/15/MarkDown%E6%B5%8B%E8%AF%95/" data-id="cka8037br0000ljxuf76g09qu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -189,7 +189,7 @@
           </li>
         
           <li>
-            <a href="/2020/05/15/stream%E5%AD%A6%E4%B9%A0map()/">stream处理list中的内容</a>
+            <a href="/2020/05/15/MarkDown%E6%B5%8B%E8%AF%95/">MarkDown测试</a>
           </li>
         
       </ul>
