@@ -1,0 +1,183 @@
+<html>
+<!-- Head tag -->
+<head>
+  <meta charset="UTF-8">
+
+  
+  <title>
+    JAVA8 Stream的一些方法 |
+    FINV的博客
+  </title>
+  
+
+
+  <meta name="description" content="">
+  <meta name="author" content="FINV">
+  <meta property="og:title" content="JAVA8 Stream的一些方法" />
+  <meta property="og:description" content="" />
+  <meta property='og:site_name' content='FINV的博客' />
+  <meta property="og:image" content="http://yoursite.com/img/default.jpg" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:description" content="" />
+  <meta name="twitter:title" content="JAVA8 Stream的一些方法" />
+
+  <meta name="twitter:image" content="http://yoursite.com/img/default.jpg" />
+
+  <script src="https://www.amcharts.com/lib/4/core.js"></script>
+  <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+  <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+    crossorigin="anonymous">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <!-- Menu -->
+    <nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark page-navbar gradient">
+  <div class="container">
+    <a class="navbar-brand logo" href="http://yoursite.com">
+      FINV的博客</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item item">
+          
+        <li class="nav-item item">
+          <a class="nav-link" href="/">
+            Home</a>
+        </li>
+        
+        <li class="nav-item item">
+          <a class="nav-link" href="/archives">
+            🗂️Archives</a>
+        </li>
+        
+        <li class="nav-item item">
+          <a class="nav-link" href="https://hexo.io/" target="_blank" rel="noopener">
+            Hexo</a>
+        </li>
+        
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <main class="page main-page">
+        <div class="container blogPost">
+    <div class="row">
+        <div class="col-sm-9 px-md-5">
+            <h2 class="blog-post-title">
+                JAVA8 Stream的一些方法
+            </h2>
+            <p class="meta">
+                <i class="far fa-clock"></i>
+                2020-05-15 
+            </p>
+            <!-- Content -->
+            <p>实体类</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@Data</span><br><span class="line">public class Animal &#123;</span><br><span class="line">  String id;</span><br><span class="line">  String name;</span><br><span class="line"></span><br><span class="line">  public Animal(String n, String m) &#123; &#x2F;&#x2F;有参数构造函数，实现给private成员变量传参数值的功能</span><br><span class="line">    name &#x3D; m;</span><br><span class="line">    id &#x3D; n;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>练习方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line">public class Test1 &#123;</span><br><span class="line"></span><br><span class="line">  public static void main(String[] args) &#123;</span><br><span class="line">    List&lt;Animal&gt; animalList &#x3D; new ArrayList&lt;Animal&gt;();</span><br><span class="line">    Animal animal1 &#x3D; new Animal(&quot;1&quot;, &quot;猫&quot;);</span><br><span class="line">    Animal animal2 &#x3D; new Animal(&quot;2&quot;, &quot;兔子&quot;);</span><br><span class="line">    Animal animal3 &#x3D; new Animal(&quot;3&quot;, &quot;袋鼠&quot;);</span><br><span class="line">    Animal animal4 &#x3D; new Animal(&quot;3&quot;, &quot;袋鼠&quot;);</span><br><span class="line">    Animal animal5 &#x3D; new Animal(&quot;3&quot;, &quot;老虎&quot;);</span><br><span class="line">    Animal animal6 &#x3D; new Animal(&quot;4&quot;, &quot;狗&quot;);</span><br><span class="line"></span><br><span class="line">    animalList.add(animal2);</span><br><span class="line">    animalList.add(animal1);</span><br><span class="line">    animalList.add(animal3);</span><br><span class="line">    animalList.add(animal4);</span><br><span class="line">    animalList.add(animal5);</span><br><span class="line">    animalList.add(animal6);</span><br><span class="line">    &#x2F;&#x2F;去掉ID为4的实体</span><br><span class="line">    animalList.removeIf(s -&gt; s.getId().equals(&quot;4&quot;));</span><br><span class="line">    System.out.println(&quot;animalList &#x3D; &quot; + animalList);</span><br><span class="line">    System.out.println(&quot;---------------&quot;);</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;根据ID进行排序</span><br><span class="line">    List&lt;Animal&gt; animalList1 &#x3D; animalList.stream()</span><br><span class="line">        .sorted(Comparator.comparing(Animal::getId))</span><br><span class="line">        .collect(Collectors.toList());</span><br><span class="line">    System.out.println(&quot;animalList1 &#x3D; &quot; + animalList1);</span><br><span class="line">    System.out.println(&quot;---------------&quot;);</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;取出NAME作为新的list</span><br><span class="line">    List&lt;String&gt; animalIdList1 &#x3D; animalList1.stream()</span><br><span class="line">        .map(Animal::getName)</span><br><span class="line">        .collect(Collectors.toList());</span><br><span class="line">    animalIdList1.forEach(s -&gt; System.out.print(&quot;NAME &#x3D; &quot; + s + &quot; &quot;));</span><br><span class="line">    System.out.println(&quot;\n---------------&quot;);</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;提取ID 并对ID去重</span><br><span class="line">    List&lt;String&gt; animalIdList2 &#x3D; animalList1.stream()</span><br><span class="line">        .map(Animal::getId).distinct()</span><br><span class="line">        .collect(Collectors.toList());</span><br><span class="line">    animalIdList2.forEach(s -&gt; System.out.print(&quot;ID &#x3D; &quot; + s + &quot; &quot;));</span><br><span class="line">    System.out.println(&quot;\n---------------&quot;);</span><br><span class="line"></span><br><span class="line">    List&lt;Animal&gt; unique &#x3D; animalList1.stream().collect(</span><br><span class="line">        Collectors.collectingAndThen(</span><br><span class="line">            Collectors.toCollection(() -&gt; new TreeSet&lt;&gt;(Comparator.comparing(Animal::getId))), ArrayList::new)</span><br><span class="line">    );</span><br><span class="line">    System.out.println(&quot;unique &#x3D; &quot; + unique);</span><br><span class="line">    System.out.println(&quot;\n---------------&quot;);</span><br><span class="line"></span><br><span class="line">    List&lt;Animal&gt; unique1 &#x3D; animalList1.stream().collect(</span><br><span class="line">        Collectors. collectingAndThen(</span><br><span class="line">            Collectors.toCollection(() -&gt; new TreeSet&lt;&gt;(Comparator.comparing(o -&gt; o.getName() + &quot;;&quot; + o.getId()))), ArrayList::new)</span><br><span class="line">    );</span><br><span class="line">    System.out.println(&quot;unique1 &#x3D; &quot; + unique1);</span><br><span class="line">    System.out.println(&quot;\n---------------&quot;);</span><br><span class="line"></span><br><span class="line">    Map&lt;String, Object&gt; map &#x3D; new HashMap&lt;String, Object&gt;();</span><br><span class="line">    map.put(&quot;name&quot;, &quot;ZK&quot;);</span><br><span class="line">    map.put(&quot;age&quot;, 13);</span><br><span class="line"></span><br><span class="line">    Map&lt;String, Object&gt; map2 &#x3D; new HashMap&lt;String, Object&gt;();</span><br><span class="line">    map2.put(&quot;name&quot;, &quot;ZA&quot;);</span><br><span class="line">    map2.put(&quot;age&quot;, 15);</span><br><span class="line"></span><br><span class="line">    Map&lt;String, Object&gt; map3 &#x3D; new HashMap&lt;String, Object&gt;();</span><br><span class="line">    map3.put(&quot;name&quot;, &quot;CX&quot;);</span><br><span class="line">    map3.put(&quot;age&quot;, 20);</span><br><span class="line"></span><br><span class="line">    Map&lt;String, Object&gt; map4 &#x3D; new HashMap&lt;String, Object&gt;();</span><br><span class="line">    map4.put(&quot;name&quot;, &quot;CX&quot;);</span><br><span class="line">    map4.put(&quot;age&quot;, 18);</span><br><span class="line"></span><br><span class="line">    List&lt;Map&lt;String, Object&gt;&gt; list &#x3D; new ArrayList&lt;Map&lt;String, Object&gt;&gt;();</span><br><span class="line">    list.add(map);</span><br><span class="line">    list.add(map2);</span><br><span class="line">    list.add(map3);</span><br><span class="line">    list.add(map4);</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 排序代码如下</span><br><span class="line">    List&lt;Map&lt;String, Object&gt;&gt; collect &#x3D; list.stream()</span><br><span class="line">        .sorted(Comparator.comparing(Test1::comparingByName)</span><br><span class="line">            .thenComparing(Comparator.comparing(Test1::comparingByAge).reversed()))</span><br><span class="line">        .collect(Collectors.toList());</span><br><span class="line"></span><br><span class="line">    System.out.println(collect);</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  private static String comparingByName(Map&lt;String, Object&gt; map) &#123;</span><br><span class="line">    return (String) map.get(&quot;name&quot;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  private static Integer comparingByAge(Map&lt;String, Object&gt; map) &#123;</span><br><span class="line">    return (Integer) map.get(&quot;age&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+            <br />
+            <p class="meta">
+                
+            </p>
+        </div>
+
+        <div class="col-sm-3">
+             
+<span><b> TL;DR</b></span>
+<p>
+	Yet another hexo theme.
+</p>
+<hr />
+
+
+<span><b> TL;DR 2</b></span>
+<p>
+	No, not another one :/
+</p>
+<hr />
+
+ 
+
+<span
+	><a href="https://twitter.com/hexojs" target="_blank" rel="noopener"
+		><b
+			><i class="fab fa-twitter-square"></i>
+			<i class="fas fa-at"></i>
+			hexojs</b
+		></a
+	></span
+>
+<br />
+<a class="twitter-timeline" data-height="800" data-dnt="true" data-chrome="nofooter transparent noheader noborders " href="https://twitter.com/hexojs?ref_src=twsrc%5Etfw" target="_blank" rel="noopener"></a>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+        </div>
+    </div>
+</div>
+<!-- Menu fade on scroll -->
+<script>
+    var isScrolling;
+    var prevScrollpos = window.pageYOffset;
+    window.addEventListener(
+        'scroll',
+        function(event) {
+            window.clearTimeout(isScrolling);
+            isScrolling = setTimeout(function() {
+                var currentScrollPos = window.pageYOffset;
+                if (prevScrollpos > currentScrollPos) {
+                    $('#navbar').slideDown();
+                } else {
+                    $('#navbar').slideUp();
+                }
+                prevScrollpos = currentScrollPos;
+            }, 66);
+        },
+        false
+    );
+</script>
+
+
+
+<a class="float-right gradient btn paginationbtn" href="/2020/05/15/MarkDown测试/"><i class="fas fa-chevron-right"></i></a>
+
+    </main>
+    <!-- Footer -->
+    <footer class="page-footer">
+  <div class="container">
+    <div class="social-icons">
+      
+      <a href="https://hexo.io/" title="Hexo.io" target="_blank" rel="noopener" class="fas fa-home"></a>
+      
+      <a href="https://twitter.com/hexojs" title="@hexojs" target="_blank" rel="noopener" class="fab fa-twitter"></a>
+      
+      <a href="https://github.com/RandomAdversary/Gradient/issues" title="Report issue" target="_blank" rel="noopener" class="fas fa-bug"></a>
+      
+    </div>
+  </div>
+</footer>
+    <!-- After footer scripts -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
